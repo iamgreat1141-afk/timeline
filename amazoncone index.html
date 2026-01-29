@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SAYNAZON</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
+    body { background: #f2f2f2; }
+
+    /* Header */
+    header { background: #131921; color: white; display:flex; align-items:center; padding: 10px 20px; position:sticky; top:0; z-index:10; justify-content: space-between; flex-wrap: wrap;}
+    header h1 { color:#ff9900; font-size:1.8rem; cursor:pointer;}
+    .search-bar { flex:1; margin:0 20px; display:flex; min-width:200px; }
+    .search-bar input { flex:1; padding:8px; border:none; border-radius:4px 0 0 4px; }
+    .search-bar button { padding:8px 12px; background:#febd69; border:none; border-radius:0 4px 4px 0; cursor:pointer;}
+    nav { display:flex; gap:15px; flex-wrap:wrap;}
+    nav a { color:white; text-decoration:none; font-size:0.9rem; padding:5px;}
+    nav a:hover { text-decoration:underline;}
+
+    /* Hamburger menu for small screens */
+    .hamburger { display:none; flex-direction:column; cursor:pointer; }
+    .hamburger div { width:25px; height:3px; background:white; margin:4px 0; }
+
+    /* Main container */
+    .container { max-width:1200px; margin:20px auto; padding:0 20px; }
+
+    /* Hero Banner */
+    .hero { background:#232f3e; color:white; padding:60px 20px; text-align:center; border-radius:10px; margin-bottom:30px;}
+    .hero h2 { font-size:2rem; margin-bottom:15px; }
+    .hero p { font-size:1.1rem; }
+
+    /* Product Grid */
+    .products { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:20px; }
+    .card { background:white; padding:15px; border-radius:10px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+    .card img { width:100%; height:180px; object-fit:contain; margin-bottom:10px;}
+    .card h4 { margin:10px 0; font-size:1rem;}
+    .card p { font-weight:bold; color:green; margin-bottom:8px;}
+    .card button { padding:8px; width:100%; border:none; background:#febd69; border-radius:5px; cursor:pointer;}
+    .card button:hover { background:#f7a900;}
+
+    /* Product Detail */
+    .product-detail { display:flex; flex-wrap:wrap; gap:20px; margin-bottom:30px; }
+    .product-detail img { flex:1; max-width:400px; border-radius:10px; }
+    .product-info { flex:2; background:white; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+    .product-info h2 { margin-bottom:10px; }
+    .product-info p { margin-bottom:10px; line-height:1.4; }
+    .product-info span { font-weight:bold; color:green; font-size:1.2rem; }
+
+    /* Cart */
+    .cart-item { display:flex; justify-content:space-between; align-items:center; background:white; padding:15px; border-radius:10px; margin-bottom:15px; box-shadow:0 2px 6px rgba(0,0,0,0.1); flex-wrap:wrap;}
+    .cart-item img { width:80px; object-fit:contain; margin-right:15px; }
+    .cart-item-details { flex:1; min-width:150px;}
+    .cart-total { text-align:right; margin-top:15px; font-size:1.2rem; font-weight:bold; }
+
+    /* Login Form */
+    .form-box { max-width:400px; margin:30px auto; background:white; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+    .form-box input { width:100%; padding:10px; margin:10px 0; border-radius:5px; border:1px solid #ccc;}
+    .form-box button { width:100%; padding:10px; border:none; background:#febd69; border-radius:5px; cursor:pointer;}
+    .form-box button:hover { background:#f7a900; }
+
+    /* Footer */
+    footer { background:#131921; color:white; text-align:center; padding:20px; margin-top:40px; font-size:0.85rem;}
+
+    /* Media Queries for Responsiveness */
+    @media(max-width:1024px){
+      .hero h2 { font-size:1.8rem; }
+      .hero p { font-size:1rem; }
+    }
+
+    @media(max-width:768px){
+      .product-detail{ flex-direction:column; }
+      .search-bar{ margin:10px 0; width:100%; }
+      nav { display:none; flex-direction:column; width:100%; }
+      .hamburger { display:flex; }
+      header.active nav { display:flex; }
+    }
+
+    @media(max-width:480px){
+      .hero h2 { font-size:1.5rem; }
+      .hero p { font-size:0.9rem; }
+      .card img { height:150px; }
+      .cart-item img { width:60px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>SAYNAZON</h1>
+
+  <div class="hamburger" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Search products...">
+    <button>Search</button>
+  </div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#cart">Cart</a>
+    <a href="#login">Login</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero" id="home">
+    <h2>Welcome to SAYNAZON</h2>
+    <p>All your favorite products in one place!</p>
+  </div>
+
+  <!-- Products -->
+  <h2 id="products">Featured Products</h2>
+  <div class="products">
+    <div class="card">
+      <img src="https://via.placeholder.com/200x180" alt="Smartphone">
+      <h4>Smartphone</h4>
+      <p>₹14,999</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/200x180" alt="Laptop">
+      <h4>Laptop</h4>
+      <p>₹49,999</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/200x180" alt="Headphones">
+      <h4>Headphones</h4>
+      <p>₹1,999</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="https://via.placeholder.com/200x180" alt="Smartwatch">
+      <h4>Smartwatch</h4>
+      <p>₹4,499</p>
+      <button>Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Product Detail -->
+  <h2>Product Detail Example</h2>
+  <div class="product-detail">
+    <img src="https://via.placeholder.com/400x400" alt="Smartphone">
+    <div class="product-info">
+      <h2>Smartphone XYZ</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. High-quality smartphone with amazing features and long battery life.</p>
+      <span>₹14,999</span>
+      <br><br>
+      <button>Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Cart -->
+  <h2 id="cart">Cart</h2>
+  <div class="cart-item">
+    <img src="https://via.placeholder.com/80x80" alt="Smartphone">
+    <div class="cart-item-details">
+      <h4>Smartphone XYZ</h4>
+      <p>Quantity: 1</p>
+      <p>Price: ₹14,999</p>
+    </div>
+    <button>Remove</button>
+  </div>
+  <div class="cart-total">Total: ₹14,999</div>
+
+  <!-- Login -->
+  <h2 id="login">Login</h2>
+  <div class="form-box">
+    <input type="text" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button>Login</button>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 SAYNAZON • All Rights Reserved
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.querySelector('header').classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>
